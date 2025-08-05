@@ -4,7 +4,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { Server, Keypair, Networks, TransactionBuilder, Operation, Asset, Memo, BASE_FEE } = require('@stellar/stellar-sdk');
+const StellarSdk = require("stellar-sdk");
 
 // --- Server Setup ---
 const app = express();
@@ -14,9 +14,11 @@ app.use(bodyParser.json());
 
 // --- Stellar Configuration ---
 // IMPORTANT: This uses the Stellar Testnet.
-const server = new Server('https://horizon-testnet.stellar.org');
-const networkPassphrase = Networks.TESTNET;
-
+// const server = new Server('https://horizon-testnet.stellar.org');
+// const networkPassphrase = Networks.TESTNET;
+const server = new StellarSdk.Horizon.Server(
+  "https://horizon-testnet.stellar.org"
+);
 // NOTE: In a real app, these keys would be stored securely (e.g., environment variables)
 // and not hardcoded. These are for demonstration on the testnet ONLY.
 
